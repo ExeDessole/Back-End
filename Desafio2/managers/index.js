@@ -19,5 +19,4 @@ await dataBaseOfProducts.addProduct('Prod. de prueba2', 'Producto de prueba', 10
 // };
 
 // env();
-
 await dataBaseOfProducts.getProduct();
