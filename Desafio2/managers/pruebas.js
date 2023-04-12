@@ -1,45 +1,17 @@
-addProduct = async (title, description, price, thumbnail, code, stock)=>{
+import fs from 'fs';
+const path = './products.json';
 
-    try {
-    
-    const products = await this.getProduct();
-    
-    const product = {
-    
-    title,
-    
-    description,
-    
-    price,
-    
-    thumbnail,
-    
-    code,
-    
-    stock,
-    
-    id: []
-    
-    };
-    
-    if (this.path.length === 0){
-    
-    product.id = 1;
-    
+fs.readFile(path, 'utf-8', (err, data)=>{
+    if(err){
+        console.log(err);
     }else{
-    
-    product.id = this.path[this.path.length - 1].id +1;
-    
+        try {
+            const dataJSON = JSON.parse(data)
+            console.log(dataJSON);            
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
-    
-    products.push(product)
-    
-    await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
-    
-    } catch (error) {
-    
-    console.log(error);
-    
-    }
-    
-    }
+});
+

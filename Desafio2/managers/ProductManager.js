@@ -8,7 +8,7 @@ export default class ProductManager{
 
   getProduct = async() =>{
     try {      
-      if (fs.existsSync(path)){
+      if (fs.existsSync(this.path)){
         const data = await fs.promises.readFile(this.path, 'utf-8')        
         const dataJSON = await JSON.parse(data);  
         return dataJSON;
@@ -32,59 +32,62 @@ export default class ProductManager{
         stock,
         id: []
       };
-      if (this.path.length === 0){
+      if (products.length === 0){
         product.id = 1;
       }else{
-        product.id = this.path[this.path.length - 1].id +1;
+        product.id = products[products.length - 1].id +1;
       }
-      path.push(product)
-      await fs.promises.writeFile(this.path, JSON.stringify(product, null, '\t'));
+      products.push(product);
+      await fs.promises.appendFile(this.path, JSON.stringify(product, null, '\t'));
     } catch (error) {
       console.log(error);
-    }  
-  }
+    } 
+
+  };
   
-  // getProductByld = (id) =>{
+  getProductByld = (id) =>{
+    try {
+      const products = this.getProduct();
+      const checkProduct = products.findIndex(product => product.id === id);
+    if (checkProduct === -1){
+      console.log('El producto no existe')
+    }else{
+      const check = products[checkProduct]       
+        return check;   
+    }
+    } catch (error) {
+      console.log(error);
+    }
 
-  //   const checkProduct = this.path.findIndex(product => product.id === id);
-  //   if (checkProduct === -1){
-  //     console.log('El producto no existe');
-  //   }else{
-  //     console.log(this.path[checkProduct]);  
-  //   };
-
-  // };
+  };
     
-  //   updateProduct = (id,newPrice) =>{
+  updateProduct = (id,newPrice) =>{
+
+    const products = this.getProduct();
+    const checkProduct = products.findIndex(product => product.id === id);
+
+    const changePrice= products[checkProduct].price;
+
+    if (changePrice === newPrice){
+      console.log('El precio es igual al ingresado');
+    }else{
+      products[checkProduct].price = newPrice;
+      return;
+    };
+
+  };
   
-  //     const checkProduct = this.path.findIndex(product => product.id === id);
-  //     if (checkProduct === -1){
-  //       console.log('El producto no existe');
-  //     }else{
-  //       console.log(this.path[checkProduct]);  
-  //     };
-  
-  //     const changePrice= this.path[checkProduct].price;
-  
-  //     if (changePrice === newPrice){
-  //       console.log('El precio es igual al ingresado');
-  //     }else{
-  //       this.path[checkProduct].price = newPrice;
-  //       return;
-  //     };
-  
-  //   };
-  
-  //   deleteProduct = (id) =>{
-  //     const checkProduct = this.path.findIndex(product => product.id === id);
-  //     if (checkProduct === -1){
-  //       console.log('El producto no existe');
-  //     }else{
-  //       delete this.path[checkProduct];
-  //       console.log('El producto ha sido eliminado');
-  //     };
-  //   }
-  
-  // };
+  deleteProduct = (id) =>{
+    const products = this.getProduct();
+    const checkProduct = products.findIndex(product => product.id === id);
+    
+    if (checkProduct === -1){
+      console.log('El producto no existe');
+    }else{
+      delete products[checkProduct];
+      console.log('El producto ha sido eliminado');
+    }
+
+  };
   
 };
