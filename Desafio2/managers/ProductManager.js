@@ -1,7 +1,5 @@
 import fs from 'fs';
 
-const path = '../files/products.json';
-
 export default class ProductManager{
   
   constructor (path){
@@ -10,9 +8,9 @@ export default class ProductManager{
 
   getProduct = async () =>{
     try {      
-      if (fs.existsSync(this.path)){
+      if (fs.existsSync(path)){
         const data = await fs.promises.readFile(this.path, 'utf-8')        
-        const dataJSON = await JSON.parse(data);  
+        const dataJSON = JSON.parse(data);  
         return dataJSON;
       }else{
         return [];
@@ -21,6 +19,7 @@ export default class ProductManager{
       console.log(error);
     }      
   };
+
 
   addProduct = async (product)=>{
     try {
