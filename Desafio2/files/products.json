@@ -1,1 +1,20 @@
-[]
+[
+	{
+		"title": "Prueba3",
+		"description": "Prueba3",
+		"price": 200,
+		"thumbnail": "Sin Img3",
+		"code": "asd123",
+		"stock": 555,
+		"id": 1
+	},
+	{
+		"title": "Prueba3",
+		"description": "Prueba3",
+		"price": 200,
+		"thumbnail": "Sin Img3",
+		"code": "asd123",
+		"stock": 555,
+		"id": 2
+	}
+]

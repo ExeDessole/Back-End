@@ -8,7 +8,7 @@ export default class ProductManager{
 
   getProduct = async () =>{
     try {      
-      if (fs.existsSync(path)){
+      if (fs.existsSync(this.path)){
         const data = await fs.promises.readFile(this.path, 'utf-8')        
         const dataJSON = JSON.parse(data);  
         return dataJSON;
@@ -33,7 +33,7 @@ export default class ProductManager{
 
       products.push(product);
 
-      await fs.promises.appendFile(this.path, JSON.stringify(products, null, '\t'));
+      await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
 
       return product;
 
