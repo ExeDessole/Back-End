@@ -6,11 +6,11 @@ export default class ProductManager{
       this.path = path;
   };
 
-  getProduct = async() =>{
+  getProduct = async () =>{
     try {      
       if (fs.existsSync(this.path)){
         const data = await fs.promises.readFile(this.path, 'utf-8')        
-        const dataJSON = await JSON.parse(data);  
+        const dataJSON = JSON.parse(data);  
         return dataJSON;
       }else{
         return [];
@@ -19,31 +19,29 @@ export default class ProductManager{
       console.log(error);
     }      
   };
-  
-  // addProduct = async (title, description, price, thumbnail, code, stock)=>{
-  //   try {
-  //     const products = await this.getProduct();
-  //     const product = {
-  //       title,
-  //       description,
-  //       price,
-  //       thumbnail,
-  //       code,
-  //       stock,
-  //       id: []
-  //     };
-  //     if (products.length === 0){
-  //       product.id = 1;
-  //     }else{
-  //       product.id = products[products.length - 1].id +1;
-  //     }
-  //     products.push(product);
-  //     await fs.promises.appendFile(this.path, JSON.stringify(product, null, '\t'));
-  //   } catch (error) {
-  //     console.log(error);
-  //   } 
 
-  // };
+
+  addProduct = async (product)=>{
+    try {
+      const products = await this.getProduct();
+   
+      if (products.length === 0){
+        product.id = 1;
+      }else{
+        product.id = products[products.length - 1].id +1;
+      }
+
+      products.push(product);
+
+      await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
+
+      return product;
+
+    } catch (error) {
+      console.log(error);
+    } 
+
+  };
   
   // getProductByld = (id) =>{
   //   try {
