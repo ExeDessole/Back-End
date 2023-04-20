@@ -43,9 +43,9 @@ export default class ProductManager{
 
   };
   
-  getProductByld = (id) =>{
+  getProductByld = async (id) =>{
     try {
-      const products = this.getProduct();
+      const products = await this.getProduct();
       const checkProduct = products.findIndex(product => product.id === id);
     if (checkProduct === -1){
       console.log('El producto no existe')

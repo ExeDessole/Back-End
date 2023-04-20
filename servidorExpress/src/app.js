@@ -19,8 +19,7 @@ app.get('/products', async (req, res) => {
 
 app.get('/products/:id/', async (req, res) => {
     const productId = Number(req.params.id);
-    const products = await dataBase.getProduct();
-    const product = products.find(u => u.id === productId);
+    const product = await dataBase.getProductByld(productId)
     if (!product) return res.send({error: 'Producto no encontrado'})
     res.send(product);
     console.log(product);
