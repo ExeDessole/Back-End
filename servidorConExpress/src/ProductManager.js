@@ -43,21 +43,21 @@ export default class ProductManager{
 
   };
   
-  // getProductByld = (id) =>{
-  //   try {
-  //     const products = this.getProduct();
-  //     const checkProduct = products.findIndex(product => product.id === id);
-  //   if (checkProduct === -1){
-  //     console.log('El producto no existe')
-  //   }else{
-  //     const check = products[checkProduct]       
-  //       return check;   
-  //   }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  getProductByld = (id) =>{
+    try {
+      const products = this.getProduct();
+      const checkProduct = products.findIndex(product => product.id === id);
+    if (checkProduct === -1){
+      console.log('El producto no existe')
+    }else{
+      const check = products[checkProduct]       
+        return check;   
+    }
+    } catch (error) {
+      console.log(error);
+    }
 
-  // };
+  };
     
   // updateProduct = (id,newPrice) =>{
 
