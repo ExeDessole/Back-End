@@ -13,6 +13,9 @@ router.post('/', (req, res) => {
     //     lastname: 'Dessole'
     // }
     const user = req.body;
+    if( !user.name || !user.lastname || !user.user){
+        return res.status(400).send({ status: 'error', error: 'Datos incompletos'});
+    }
     users.push(user);
     res.send({ status: 'succes', user})
 });

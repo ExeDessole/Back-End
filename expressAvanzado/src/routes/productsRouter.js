@@ -1,29 +1,71 @@
 import {Router} from 'express';
-import {uploader} from '../utils.js'
+import ProductManager from '../managers/ProductManager.js';
 
+// Instancia Router y la clase.
 const router = Router();
-const products = [];
+const dataBase = new ProductManager();
 
-router.get('/', (req, res) => {
-    res.send({products})
+// GET con lista de productos, llamado al método getProduct de la clase.
+router.get('/', async (req, res) => {
+  const products = await dataBase.getProduct();
+  res.send({products});
+  console.log(products);
 });
 
-router.post('/', (req, res) => {
-    // {
-    //     name: 'Exe',
-    //     price, thumbnail...etc
-    // }
-    const product = req.body;
-    users.push(product);
-    res.send({ status: 'succes', product})
+// GET con retorno por id. req params, llamado al método getProductByld de la clase.
+// Manejo de error y envío del producto
+router.get('/products/:id/', async (req, res) => {
+  const productId = Number(req.params.id);
+  const product = await dataBase.getProductByld(productId);
+
+  if (!product) return res.send({error: 'Producto no encontrado'})
+  res.send(product);
+  console.log(product);
 });
 
-router.post('/img', uploader.single('file'), (req,res) => {
-    const filename = req.file.filename;
-    const product = req.body;
-    product.image = `http://localhost:8080/img/${filename}`;
-    products.push(product);
-    res.send({status: 'success'})
+// POST envío de nuevo producto. Status default, campos obligatorios.
+// Manejo de error, llamado al método addProduct de la clase y envío de producto.
+router.post('/', async (req, res) => {
+  const product = req.body;
+
+  if (!product.status) {
+    product.status = true;
+  }
+
+  if( !product.title || !product.description || !product.code ||
+      !product.price || !product.stock) {
+      return res.status(400).send({ status: 'error', error: 'Valores incompletos'});
+      };
+
+  await dataBase.addProduct(product);
+  res.send({ status: 'succes', product});
+});
+
+// PUT cambio de precio, campo obligatorio,
+// llamado al método updateProduct de la clase y envío de producto.
+router.put('/products/:id/', async (req, res) => {
+  const productId = Number(req.params.id);
+  const newPrice = req.body;
+
+  if (!product.price) {
+      return res.status(400).send({ status: 'error', error: 'Ingrese nuevo precio'});
+    }else{
+      res.send({status: 'succes', message: 'El precio se actualizó'})
+    }
+  
+  await dataBase.updateProduct(productId,newPrice);
+  res.send({ status: 'succes', product});
 })
+
+router.delete('/products/:id/', async (req, res) => {
+  const productId = Number(req.params.id);
+  const checkProduct = products.findIndex(product => product.id === productId);
+    
+    if (checkProduct === -1){
+      return res.status(400).send({ status: 'error', error: 'El producto no exixte'});
+    }
+  await dataBase.deleteProduct(productId);
+  res.send({status: 'succes', message: 'El producto ha sido eliminado'})
+}) 
 
 export default router;
