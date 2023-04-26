@@ -1,5 +1,5 @@
 import express from 'express';
-import usersRouter from './routes/usersRouter.js';
+import usersRouter from './routes/cartsRouter.js';
 import productsRouter from './routes/productsRouter.js';
 import { __dirname } from './utils.js';
 

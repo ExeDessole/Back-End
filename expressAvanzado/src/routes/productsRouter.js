@@ -57,6 +57,7 @@ router.put('/products/:id/', async (req, res) => {
   res.send({ status: 'succes', product});
 })
 
+// DELETE borrar producto mediante id.
 router.delete('/products/:id/', async (req, res) => {
   const productId = Number(req.params.id);
   const checkProduct = products.findIndex(product => product.id === productId);
