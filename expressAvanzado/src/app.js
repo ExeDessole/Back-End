@@ -1,7 +1,6 @@
 import express from 'express';
-import usersRouter from './routes/cartsRouter.js';
 import productsRouter from './routes/productsRouter.js';
-import { __dirname } from './utils.js';
+import cartsRouter from './routes/cartsRouter.js';
 
 // Instancio el modulo express
 const app = express();
@@ -18,8 +17,8 @@ app.use((req, res, next) => {
 // Soporte ruta absoluta
 app.use(express.static(`${__dirname}/public`));
 // Rutas hacia los métodos de usuarios y productos
-app.use('/api/users', usersRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/carts', cartsRouter);
 
 // Midd de manejo de errores
 app. use((err, req, res, next) => {

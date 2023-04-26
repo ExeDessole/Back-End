@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
   res.send({ status: 'success', cart})
   console.log(cart);
   });
-
+// POST agrega un nuesvo producto en el carrito sellecionado mediante id.
 router.post('/:cid/product/:pid', async (req, res) =>{
   const cid = Number(req.params.cid);
   const cart = await carts.getCartByld(cid);
