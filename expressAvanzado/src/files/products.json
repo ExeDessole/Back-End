@@ -1,20 +1,38 @@
 [
 	{
-		"title": "Prueba1",
-		"description": "Prueba1",
-		"price": 100,
-		"thumbnail": "Sin Img1",
+		"title": "Prueba3",
+		"description": "Prueba3",
+		"price": 200,
+		"thumbnail": "Sin Img3",
 		"code": "asd123",
-		"stock": 111,
+		"stock": 555,
 		"id": 1
 	},
 	{
-		"title": "Prueba2",
-		"description": "Prueba2",
+		"title": "Prueba3",
+		"description": "Prueba3",
 		"price": 200,
-		"thumbnail": "Sin Img2",
+		"thumbnail": "Sin Img3",
 		"code": "asd123",
-		"stock": 222,
+		"stock": 555,
 		"id": 2
+	},
+	{
+		"title": "Prueba3",
+		"description": "Prueba3",
+		"price": 200,
+		"thumbnail": "Sin Img3",
+		"code": "asd123",
+		"stock": 555,
+		"id": 3
+	},
+	{
+		"title": "Prueba4",
+		"description": "Prueba4",
+		"price": 400,
+		"thumbnail": "Sin Img4",
+		"code": "asd123",
+		"stock": 444,
+		"id": 4
 	}
 ]

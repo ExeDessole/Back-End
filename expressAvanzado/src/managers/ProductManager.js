@@ -1,10 +1,8 @@
 import fs from 'fs';
 
-const path = '../files/products.json'
-
 export default class ProductManager{
   
-  constructor (){
+  constructor (path){
       this.path = path;
   };
 
@@ -15,7 +13,7 @@ export default class ProductManager{
         const dataJSON = JSON.parse(data);  
         return dataJSON;
       }else{
-        return [];
+        return 'El archivo no existe';
       }  
     } catch (error) {
       console.log(error);

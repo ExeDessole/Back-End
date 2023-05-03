@@ -17,8 +17,8 @@ app.use((req, res, next) => {
 // Soporte ruta absoluta
 // app.use(express.static(`${__dirname}/public`));
 // Rutas hacia los métodos de usuarios y productos
-app.use('/api/products', productsRouter);
-app.use('/api/carts', cartsRouter);
+app.use('/api/products/', productsRouter);
+app.use('/api/carts/', cartsRouter);
 
 // Midd de manejo de errores
 app. use((err, req, res, next) => {

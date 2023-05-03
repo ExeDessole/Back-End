@@ -8,12 +8,12 @@ const env = async () => {
     console.log(objs);
 
     const product = {
-        title: 'Prueba3',
-        description: 'Prueba3',
-        price: 200,
-        thumbnail: 'Sin Img3',
+        title: 'Prueba4',
+        description: 'Prueba4',
+        price: 400,
+        thumbnail: 'Sin Img4',
         code: 'asd123',
-        stock: 555
+        stock: 444
       };
       
       await dataBaseOfProducts.addProduct(product);
