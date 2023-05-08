@@ -7,14 +7,14 @@ const carts = new CartManager('../files/carts.json');
 // POST crea un nuevo carrito, array inicializado con un array vacío.
 router.post('/', async (req, res) => {
   const cart = {
-      carts: []
+      products: []
   }
   const result = await carts.addCart(cart)
   res.send({ status: 'success', result});
 
 });
 
-// GET retorna los productos dentro del carrito selleccionado mediante id.
+// GET retorna los productos dentro del carrito seleccionado mediante id.
 router.get('/:id', async (req, res) => {
   const cartId = Number(req.params.id);
   const cart = await carts.getCartByld(cartId);
