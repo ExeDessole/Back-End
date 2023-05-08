@@ -1,16 +1,40 @@
-import { Router } from 'express';
+import {Router} from 'express';
+import CartManager from '../managers/cartManager.js';
 
 const router = Router();
-const carts = [];
+const carts = new CartManager('../files/carts.json');
 
-router.get('/', (req, res) => {
-    res.send({carts});
+// POST crea un nuevo carrito, array inicializado con un array vacío.
+router.post('/', async (req, res) => {
+  const cart = {
+      carts: []
+  }
+  const result = await carts.addCart(cart)
+  res.send({ status: 'success', result});
+
 });
-    
-router.post('/', (req, res) => {
-  const cart = req.body;
-  carts.push(cart);
-  res.send({ status: 'succes', cart});
-});
+
+// GET retorna los productos dentro del carrito selleccionado mediante id.
+router.get('/:id', async (req, res) => {
+  const cartId = Number(req.params.id);
+  const cart = await carts.getCartByld(cartId);
+
+  if (!cart) return res.status(400).send({ status: 'error', error: 'Carrito no encontrado'});
+  res.send({ status: 'success', cart})
+  console.log(cart);
+  });
+// POST agrega un nuesvo producto en el carrito sellecionado mediante id.
+router.post('/:cid/product/:pid', async (req, res) =>{
+  const cid = Number(req.params.cid);
+  const cart = await carts.getCartByld(cid);
+  const product = req.body;
+
+  
+  if (!cart) {return res.status(400).send({ status: 'error', error: 'Carrito no encontrado'})}
+  
+  cart.push(product);
+  res.send({ status: 'success', cart})
+  console.log(cart);
+})
 
 export default router;

@@ -1,17 +1,19 @@
 import { Router } from 'express';
+import ProductManager from '../managers/productManager.js';
 import { uploader } from '../utils.js';
 
 const router = Router();
-const users = [];
+const products = new ProductManager('../files/products.json');
 
-router.get('/', (req, res) => {
-    res.send({users});
+router.get('/', async (req, res) => {
+  await products.getProduct();
+  res.send({ status: 'succes', products});
 });
     
 router.post('/', (req, res) => {
-  const user = req.body;
-  users.push(user);
-  res.send({ status: 'succes', user});
+  const product = req.body;
+  products.push(product);
+  res.send({ status: 'succes', product});
 });
 
 router.post('/img', uploader.single('file'), (req, res) => {

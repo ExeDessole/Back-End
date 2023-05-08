@@ -89,5 +89,3 @@ export default class ProductManager{
   };
   
 };
-
-
