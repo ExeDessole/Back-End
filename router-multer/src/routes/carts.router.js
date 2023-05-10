@@ -1,8 +1,10 @@
 import {Router} from 'express';
 import CartManager from '../managers/cartManager.js';
+import { __dirname } from '../utils.js';
 
 const router = Router();
-const carts = new CartManager('../files/carts.json');
+const path = `${__dirname}/files/carts.json`
+const carts = new CartManager(path);
 
 // POST crea un nuevo carrito, array inicializado con un array vacío.
 router.post('/', async (req, res) => {

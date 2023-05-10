@@ -59,8 +59,6 @@ export default class CartManager{
 
   };
 
-  };
-  
   deleteCart = (id) =>{
     const carts = this.getCart();
     const checkCart = carts.findIndex(cart => cart.id === id);
@@ -73,3 +71,7 @@ export default class CartManager{
     }
 
   };
+  
+  };
+  
+ 
