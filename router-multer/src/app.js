@@ -1,5 +1,6 @@
 import express from 'express';
 import handlebars from 'express-handlebars'
+import { Server } from 'socket.io';
 import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js'
@@ -17,12 +18,6 @@ app.use((req, res, next) => {
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
-app.get('/', (req, res) =>{
-    const user = {
-        name: 'Exe'
-    };
-    res.render('index', user);
-});
 // File statics
 app.use (express.static(`${__dirname}/public`));
 // Routes
@@ -35,4 +30,9 @@ app.use((err, req, res, next) =>{
     res.status(500).send('Error no controlado');    
 });
 // Server
-app.listen(8080, () => console.log('Server runnin on port 8080'));
+const server = app.listen(8080, () => console.log('Server runnin on port 8080'));
+// Socket
+const io = new Server(server);
+io.on('connection', socket =>{
+    console.log('Socket conectado');   
+});

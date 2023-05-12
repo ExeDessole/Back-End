@@ -1,3 +1,17 @@
 <div>
-    <h1>Bienvenido {{name}} !</h1>
+    <h1>Bienvenido {{user.name}} !</h1>
+
+    {{#each products}}
+    <div class="card" style="width: 18rem;">
+        <img src="{{this.thumbnail}}" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">{{this.title}} $: {{this.price}}</h5>
+        <p class="card-text">{{this.description}}</p>
+        <p class="card-text">Stock: {{this.stock}}</p>
+        <a href="#" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+{{/each}}
 </div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
