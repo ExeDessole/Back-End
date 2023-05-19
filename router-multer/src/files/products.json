@@ -1,8 +1,20 @@
 [
 	{
-		"name": "Exe",
-		"lastName": "Dessole",
-		"user": "Exe33",
-		"id": 1
+		"title": "Socket",
+		"description": "Elemento enviado con socket",
+		"price": "999",
+		"thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Socket-io.svg/1200px-Socket-io.svg.png",
+		"code": "Socket",
+		"stock": "88",
+		"id": "634d3ce8-4396-462f-9364-ad68f39e6d7e"
+	},
+	{
+		"title": "Nuevo producto",
+		"description": "Enviaod con socket",
+		"price": "6767",
+		"thumbnail": "https://ik.imagekit.io/ably/ghost/prod/2021/03/socket-io-logo-1.jpeg?tr=w-1728,q-50",
+		"code": "sdfsdf",
+		"stock": "4444",
+		"id": "62f0ed49-09ce-46d9-a2ba-4f6512f045bc"
 	}
 ]

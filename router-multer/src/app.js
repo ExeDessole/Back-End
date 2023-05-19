@@ -33,6 +33,5 @@ app.use((err, req, res, next) =>{
 const server = app.listen(8080, () => console.log('Server runnin on port 8080'));
 // Socket
 const io = new Server(server);
-io.on('connection', socket =>{
-    console.log('Socket conectado');   
-});
+
+app.set('socketio', io);
