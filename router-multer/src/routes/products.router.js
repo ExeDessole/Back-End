@@ -4,34 +4,36 @@ import ProductManager from '../managers/productManager.js';
 import { __dirname } from '../utils.js';
 
 const router = Router();
-const path = `${__dirname}/files/products.json`
-const products = new ProductManager(path);
+const products = new ProductManager();
 
-router.get('/', async (req, res) =>{
-try {
-  const limit = req.query.limit;
-  const user = { name: 'Exe', role: 'user' };
-  const productsList = await products.getProduct();
+// router.get('/', async (req, res) =>{
+// try {
+//   const limit = req.query.limit;
+//   const user = { name: 'Exe', role: 'user' };
+//   const productsList = await products.getProduct();
 
-  if(!limit){  
-    console.log(productsList);
-    return res.status(200).render('main', {user, productsList});
-  }
-  return res.status(200).render('main', { user, products: productsList.slice(0, limit) });
-} catch (error) {
-  res.status(401).send('download failed - products');
-}
+//   if(!limit){  
+//     console.log(productsList);
+//     return res.status(200).render('main', {user, productsList});
+//   }
+//   return res.status(200).render('main', { user, products: productsList.slice(0, limit) });
+// } catch (error) {
+//   res.status(401).send('download failed - products');
+// }
  
-});
-
-router.post('/', async (req, res) => {
+// });
+router.get('/', async (req, res, next) => {
   try {
-    const product = req.body;
-    const newProduct = await products.addProduct(product);
-    res.send({ status: 'succes', newProduct});
+    const user = { name: 'Exe', role: 'user' };
+    const productsList = await products.getProduct();
+  
+    console.log(productsList);
+    return res.status(200).render('home', { productsList, user });
+
   } catch (error) {
-    res.status(401).send('product not created');
+    next(error); // Pasa el error al siguiente middleware de manejo de errores
   }
+});
 
 router.get('/new-entry', (req, res) =>{
   return res.render('new-entry');
@@ -44,12 +46,14 @@ router.post('/new-entry', async (req, res) =>{
       
       return res.render('error', { message: 'Por favor complete todos los campos' });
   }
-    
-  const data = await products.addProduct({ title, description, price, thumbnail, code, stock });
-    
-  return res.render('main', data);
+  const newProduct = { title, description, price, thumbnail, code, stock };
+  
+  const addedProduct = await products.addProduct(newProduct);
+  const user = {name:', se agregó este nuevo producto'}
+  return res.render('new-entry', { productsList: [addedProduct], user });
+  // return res.render('home', productsList);
 });  
-});
+
 
 
 

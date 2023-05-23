@@ -25,36 +25,32 @@ export default class ProductManager{
   addProduct = async (product) => {
     try {
       const products = await this.getProduct();
-      if (products){
-              product.id = uuid();
-            }      
-      
+      product.id = uuid();      
       products.push(product);
-      
       await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
-      
       return product;
     } catch (error) {
       console.log(error);
+      throw error;
     } 
   };
   
   
-  // getProductByld = (id) =>{
-  //   try {
-  //     const products = this.getProduct();
-  //     const checkProduct = products.findIndex(product => product.id === id);
-  //   if (checkProduct === -1){
-  //     console.log('El producto no existe')
-  //   }else{
-  //     const check = products[checkProduct]       
-  //       return check;   
-  //   }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  getProductByld = async (id) =>{
+    try {
+      const products = await this.getProduct();
+      const checkProduct = products.find(product => product.id == id);
 
-  // };
+      if (!checkProduct) {
+        console.log('El producto no existe');
+      } else {
+        return checkProduct;
+      }
+    } catch (error) {
+      console.log(error);
+      throw error;
+    } 
+  };
     
   // updateProduct = (id,newPrice) =>{
 
